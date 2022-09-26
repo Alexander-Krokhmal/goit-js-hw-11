@@ -96,7 +96,6 @@ function onFormSubmit(e) {
 function onLoadMore() {
     Pixabay.incrementePage();
     fetchImage();
-
 }
 
 async function fetchImage() {
@@ -120,6 +119,7 @@ async function fetchImage() {
         Notify.info("We're sorry, but you've reached the end of search results.");
     }
 }
+
 
 function renderGallery(hits) {
     const markup = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
@@ -147,7 +147,12 @@ function renderGallery(hits) {
   </div>
   </a>`}).join('');
     refs.galeryEl.insertAdjacentHTML('beforeend', markup);
-    const simpleLightBox = new SimpleLightbox('.gallery a');
+    
+    simpleLightBox.refresh();
 }
+const simpleLightBox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
 
 
